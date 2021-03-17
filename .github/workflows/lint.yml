@@ -29,5 +29,10 @@ jobs:
           node-version: '14'
 
       # Runs a single command using the runners shell
-      - run: npm install
-      - run: npm run lint
+      - name: Installing dependencies
+        run: npm install
+        working-directory: code
+        
+      - name: Running eslint
+        run: npm run lint
+        working-directory: code
