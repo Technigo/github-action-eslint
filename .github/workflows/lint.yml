@@ -18,32 +18,46 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  eslint:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    eslint:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+        - run: npm install # or yarn install
+        - uses: sibiraj-s/action-eslint@v1
+          with:
+            extensions: 'js, jsx, ts, tsx'
+            annotations: true
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#   eslint:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'
 
-      # Runs a single command using the runners shell
-      - name: Installing dependencies
-        run: npm install
-        working-directory: code
+#       # Runs a single command using the runners shell
+#       - name: Installing dependencies
+#         run: npm install
+#         working-directory: code
         
-      - name: Running eslint
-        run: npm run lint
-        working-directory: code
+#       - name: Running eslint
+#         run: npm run lint
+#         working-directory: code
         
-      - name: Saving code linting report to JSON
-        run: eslint --output-file eslint_report.json --format json code
+#       - name: Saving code linting report to JSON
+#         run: eslint --output-file eslint_report.json --format json code
         
-      - name: Uploading ESLint report
-        uses: actions/upload-artifact@v1
-        with:
-          name: eslint_report.json
-          path: eslint_report.json
+#       - name: Uploading ESLint report
+#         uses: actions/upload-artifact@v1
+#         with:
+#           name: eslint_report.json
+#           path: eslint_report.json
