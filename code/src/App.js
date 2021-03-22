@@ -3,6 +3,7 @@ import data from './data.json'
 
 import ReactDOM from 'react-dom'
 import data from './data.json'
+import data from './data.json'
 
 console.log(data)
 
