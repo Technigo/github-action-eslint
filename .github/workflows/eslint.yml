@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Lint CI
+name: ESLint CI
 
 # Controls when the action will run. 
 on:
@@ -29,27 +29,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-
-      # Runs a single command using the runners shell
-      - name: Removing File
-        uses: JesseTG/rm@v1.0.2
-        with:
-          path: code/eslint_report.json
       
       - name: Installing dependencies
         run: npm install
         working-directory: code
         
-      - name: Running eslint
+      - name: Running ESLint
         run: npm run lint
         working-directory: code
-        
-      - name: Saving code linting report to JSON
-        run: npm run lint --output-file eslint_report.json --format json code
-        working-directory: code
-        
-      - name: Uploading ESLint report
-        uses: actions/upload-artifact@v1
-        with:
-          name: eslint_report.json
-          path: eslint_report.json
