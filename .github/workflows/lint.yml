@@ -36,7 +36,7 @@ jobs:
           files: "src/**/*"
 #           ignore: "src/some-file-to-ignore.js"
           extensions: ".js, .ts, .jsx, .tsx"
-          working-directory: "./code"
+          working-directory: "/code"
           quiet: "false"    
 
 #       # Runs a single command using the runners shell
