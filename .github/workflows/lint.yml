@@ -31,7 +31,7 @@ jobs:
           node-version: '14'
 
       # Runs a single command using the runners shell
-      - name: Remove File
+      - name: Removing File
         uses: JesseTG/rm@v1.0.2
         with:
           path: code/eslint_report.json
